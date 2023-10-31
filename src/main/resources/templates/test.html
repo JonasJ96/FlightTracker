@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Template</title>
+</head>
+<body>
+<h2>Flight Information</h2>
+
+<ul>
+    <!-- Assuming each item in the list is a string -->
+    <li th:each="item : ${itemList}" th:text="${item}"></li>
+</ul>
+</body>
+</html>
