@@ -90,6 +90,7 @@
     </tr>
     </thead>
     <tbody>
+    <!-- Iterate over the itemList and display each FlightData -->
     <tr th:each="flightData : ${itemList}">
         <td th:text="${flightData.number}">Flight Number</td>
         <td th:text="${flightData.flight_date}">Flight Date</td>
