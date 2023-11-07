@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #3498db;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            z-index: 1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<h2>Flight List</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Flight Number</th>
+        <th>Flight Date</th>
+        <th>Flight Status</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the itemList and display each FlightData -->
+    <tr th:each="flightData : ${itemList}">
+        <td th:text="${flightData.number}">Flight Number</td>
+        <td th:text="${flightData.flight_date}">Flight Date</td>
+        <td th:text="${flightData.flight_status}">Flight Status</td>
+        <td>
+            <a href="#" th:text="${flightData.departure.airport}"
+               th:data-title="'Departure Info'"
+               th:data-airport="${flightData.departure.airport}"
+               th:data-scheduled="${flightData.departure.scheduled}"
+               th:data-actual="${flightData.departure.actual}"
+               th:data-estimated="${flightData.departure.estimated}"
+               onclick="showPopup(this)"></a>
+        </td>
+        <td>
+            <a href="#" th:text="${flightData.arrival.airport}"
+               th:data-title="'Arrival Info'"
+               th:data-airport="${flightData.arrival.airport}"
+               th:data-scheduled="${flightData.arrival.scheduled}"
+               th:data-actual="${flightData.arrival.actual}"
+               th:data-estimated="${flightData.arrival.estimated}"
+               onclick="showPopup(this)"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="overlay" th:onclick="'hidePopup()'"></div>
+<div id="popup" class="popup"></div>
+
+<script th:inline="javascript">
+    function showPopup(link) {
+        var title = link.getAttribute('data-title');
+        var airport = link.getAttribute('data-airport');
+        var scheduled = link.getAttribute('data-scheduled');
+        var actual = link.getAttribute('data-actual');
+        var estimated = link.getAttribute('data-estimated');
+        var content = 'Airport: ' + airport + '<br>Scheduled: ' + scheduled + '<br>Actual: ' + actual + '<br>Estimated: ' + estimated;
+        document.getElementById('popup').innerHTML = '<h3>' + title + '</h3><p>' + content + '</p>';
+        document.getElementById('popup').style.display = 'block';
+        document.querySelector('.overlay').style.display = 'block';
+    }
+
+    function hidePopup() {
+        document.getElementById('popup').style.display = 'none';
+        document.querySelector('.overlay').style.display = 'none';
+    }
+
+</script>
+
+</body>
+</html>

@@ -12,11 +12,13 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
 public class HomeController {
     private final FlightsService flightsService;
+    private List<FlightDataDTO> itemList = Collections.emptyList();
 
     public HomeController(FlightsService flightsService) {
         this.flightsService = flightsService;
@@ -30,8 +32,9 @@ public class HomeController {
 
     @GetMapping("/test")
     public String test(Model model) throws Exception {
-
-        List<FlightDataDTO> itemList = flightsService.getFlightsData();
+        if(itemList.isEmpty()) {
+             itemList = flightsService.getFlightsData(0);
+        }
         model.addAttribute("itemList", itemList);
 
 

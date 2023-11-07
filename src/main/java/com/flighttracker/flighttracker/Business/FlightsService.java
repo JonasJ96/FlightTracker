@@ -20,9 +20,11 @@ import java.util.List;
 public class FlightsService {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public List<FlightDataDTO> getFlightsData() throws URISyntaxException, IOException, InterruptedException {
+
+    public List<FlightDataDTO> getFlightsData(int offset) throws URISyntaxException, IOException, InterruptedException {
         objectMapper.registerModule(new JavaTimeModule());
-        String url = "http://api.aviationstack.com/v1/flights?access_key=8d6550887f07d52218a8fab4d32070c7";
+        String url = "http://api.aviationstack.com/v1/flights?access_key=8d6550887f07d52218a8fab4d32070c7" + "&limit=100" + "&offset=" + offset;
+        //String url = "https://api.aviationstack.com/v1/flights?access_key=8d6550887f07d52218a8fab4d32070c7&limit=100&offset=500";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(url))
                 .GET()
@@ -32,6 +34,8 @@ public class FlightsService {
 
         FlightResponseDTO flightResponseDTO = objectMapper.readValue(reponseString, FlightResponseDTO.class);
         System.out.println(flightResponseDTO.getData());
+        System.out.println(url);
+        System.out.println(offset);
         return flightResponseDTO.getData();
     }
 }
