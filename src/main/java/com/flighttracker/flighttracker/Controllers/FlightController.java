@@ -6,6 +6,7 @@ import com.flighttracker.flighttracker.DataObjects.FlightData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,14 +24,15 @@ public class FlightController {
     }
 
     @GetMapping("/flights")
-    public String flights(Model model) throws Exception {
-        if(itemList.isEmpty()) {
-            flightsService.getFlightsData(offset).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
-        }
-        /*
-        itemList = new ArrayList<>();
-        flightsService.getFlightsData(offset).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
-        */
+    public String flights(@RequestParam(defaultValue = "0") int offset, Model model) throws Exception {
+//
+//        if(itemList.isEmpty()) {
+//            flightsService.getFlightsData(offset).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
+//        }
+//
+//        itemList = new ArrayList<>();
+//        flightsService.getFlightsData(offset).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
+
 
 
         model.addAttribute("itemList", itemList);

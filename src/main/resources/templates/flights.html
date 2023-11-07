@@ -38,6 +38,22 @@
             background-color: #fff;
         }
 
+        button {
+            display: block;
+            margin: 20px auto; /* Center the button horizontally */
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
         .popup {
             display: none;
             position: fixed;
@@ -73,11 +89,16 @@
             text-decoration: underline;
         }
 
+
+
     </style>
 </head>
 <body>
 
 <h2>Flight List</h2>
+
+<button onclick="loadMoreFlights()">Load More Flights</button>
+
 
 <table>
     <thead>
@@ -136,6 +157,23 @@
     function hidePopup() {
         document.getElementById('popup').style.display = 'none';
         document.querySelector('.overlay').style.display = 'none';
+    }
+
+        function loadMoreFlights() {
+
+        var currentOffset = new URLSearchParams(window.location.search).get('offset');
+
+
+        currentOffset = currentOffset ? parseInt(currentOffset) : 0;
+
+
+        var newOffset = currentOffset + 100;
+
+
+        var newUrl = window.location.origin + window.location.pathname + '?offset=' + newOffset;
+
+
+        window.location.href = newUrl;
     }
 
 </script>

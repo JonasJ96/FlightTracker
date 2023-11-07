@@ -25,11 +25,8 @@ public class FlightsService {
         objectMapper.registerModule(new JavaTimeModule());
         String url = "http://api.aviationstack.com/v1/flights?access_key=8d6550887f07d52218a8fab4d32070c7" + "&limit=100" + "&offset=" + offset;
         //String url = "https://api.aviationstack.com/v1/flights?access_key=8d6550887f07d52218a8fab4d32070c7&limit=100&offset=500";
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI(url))
-                .GET()
-                .build();
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        HttpRequest request = getHttpRequest(url);
+        HttpResponse<String> response = getHttpResponse(request);
         String reponseString = response.body();
 
         FlightResponseDTO flightResponseDTO = objectMapper.readValue(reponseString, FlightResponseDTO.class);
@@ -37,5 +34,22 @@ public class FlightsService {
         System.out.println(url);
         System.out.println(offset);
         return flightResponseDTO.getData();
+    }
+
+    public HttpResponse<String> getHttpResponse(HttpRequest request) throws IOException, InterruptedException {
+        return HttpClient
+                .newHttpClient()
+                .send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public HttpRequest getHttpRequest(String url) throws URISyntaxException {
+        if (url == null) {
+            throw new IllegalArgumentException("URL cannot be null");
+        }
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(url))
+                .GET()
+                .build();
+        return request;
     }
 }
