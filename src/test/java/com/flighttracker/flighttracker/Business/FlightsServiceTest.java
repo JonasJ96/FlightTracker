@@ -51,7 +51,8 @@ public class FlightsServiceTest {
     void testGetFlightsData() throws URISyntaxException, IOException, InterruptedException {
         // Arrange
         String resultString = "Result";
-        String url = "http://api.aviationstack.com/v1/flights?access_key=8d6550887f07d52218a8fab4d32070c7&limit=100&offset=0";
+        //String url = "http://api.aviationstack.com/v1/flights?access_key=8d6550887f07d52218a8fab4d32070c7&limit=100&offset=0";
+        String url = "ResultUrl";
 
         System.out.println(flightsServiceMock.getHttpRequest(url));
         when(httpRequestMock.uri()).thenReturn(uriMock);
@@ -70,7 +71,7 @@ public class FlightsServiceTest {
         // Assert
         assertEquals(flightDataDTOListMock, result);
 
-        // Verify that the expected methods were called
+        // Verify
         verify(httpResponseMock, times(1)).body();
         verify(objectMapperMock, times(1)).readValue(anyString(), eq(FlightResponseDTO.class));
     }

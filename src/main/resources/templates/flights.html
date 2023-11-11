@@ -40,7 +40,7 @@
 
         button {
             display: block;
-            margin: 20px auto; /* Center the button horizontally */
+            margin: 20px auto;
             padding: 10px 20px;
             font-size: 16px;
             background-color: #3498db;
@@ -111,7 +111,6 @@
     </tr>
     </thead>
     <tbody>
-    <!-- Iterate over the itemList and display each FlightData -->
     <tr th:each="flightData : ${itemList}">
         <td th:text="${flightData.number}">Flight Number</td>
         <td th:text="${flightData.flight_date}">Flight Date</td>

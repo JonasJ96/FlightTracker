@@ -6,6 +6,13 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DepartureData {
+
+
+    private String airport;
+    private String scheduled;
+    private String actual;
+    private String estimated;
+
     public String getAirport() {
         return airport;
     }
@@ -13,16 +20,9 @@ public class DepartureData {
     public void setAirport(String airport) {
         this.airport = airport;
     }
-
-    private String airport;
-        private String scheduled;
-        private String actual;
-        private String estimated;
-
-
-        public void setScheduled(OffsetDateTime scheduled) {
-            this.scheduled = formatOffsetDateTime(scheduled);
-        }
+    public void setScheduled(OffsetDateTime scheduled) {
+        this.scheduled = formatOffsetDateTime(scheduled);
+    }
 
     public String getScheduled() {
         return scheduled;

@@ -25,19 +25,18 @@ public class FlightController {
 
     @GetMapping("/flights")
     public String flights(@RequestParam(defaultValue = "0") int offset, Model model) throws Exception {
-//
-//        if(itemList.isEmpty()) {
-//            flightsService.getFlightsData(offset).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
-//        }
-//
-//        itemList = new ArrayList<>();
-//        flightsService.getFlightsData(offset).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
+
+        if(itemList.isEmpty()) {
+            flightsService.getFlightsData(offset).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
+        }
+
+        itemList = new ArrayList<>();
+        flightsService.getFlightsData(offset).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
 
 
 
         model.addAttribute("itemList", itemList);
 
-        //offset = offset+100;
         return "flights";
     }
 }
