@@ -11,7 +11,7 @@ public class FlightData {
     private String flight_status;
 
     private String number;
-    private String airline;
+    private AirlineData airline;
     private DepartureData departure;
     private ArrivalData arrival;
 
@@ -39,11 +39,11 @@ public class FlightData {
         this.number = number;
     }
 
-    public String getAirline() {
+    public AirlineData getAirline() {
         return airline;
     }
 
-    public void setAirline(String airline) {
+    public void setAirline(AirlineData airline) {
         this.airline = airline;
     }
 
@@ -65,7 +65,7 @@ public class FlightData {
 
     public static FlightData mapFromDTO(FlightDataDTO flightDataDTO) {
         FlightData flightData = new FlightData();
-        flightData.setAirline(flightDataDTO.getAirline().getName());
+        flightData.setAirline(AirlineData.mapFromDTO(flightDataDTO.getAirline()));
         flightData.setArrival(ArrivalData.mapFromDTO(flightDataDTO.getArrival()));
         flightData.setDeparture(DepartureData.mapFromDTO(flightDataDTO.getDeparture()));
         flightData.setFlight_date(flightDataDTO.getFlight_date());

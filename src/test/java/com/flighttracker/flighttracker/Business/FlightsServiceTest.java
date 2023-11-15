@@ -1,6 +1,7 @@
 package com.flighttracker.flighttracker.Business;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.flighttracker.flighttracker.DTO.FlightDataDTO;
 import com.flighttracker.flighttracker.DTO.FlightResponseDTO;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,12 @@ public class FlightsServiceTest {
 
     @Spy
     @InjectMocks
-    private FlightsService flightsServiceMock;
+    private FlightsService testobj;
+
+    @Mock
+    FlightsClient flightsClientMock;
+    @Mock
+    FlightRequestMapper flightRequestMapperMock;
 
     @Mock
     private HttpClient httpClientMock;
@@ -50,23 +56,20 @@ public class FlightsServiceTest {
     @Test
     void testGetFlightsData() throws URISyntaxException, IOException, InterruptedException {
         // Arrange
-        String resultString = "Result";
-        //String url = "http://api.aviationstack.com/v1/flights?access_key=8d6550887f07d52218a8fab4d32070c7&limit=100&offset=0";
-        String url = "ResultUrl";
+        String resultString = "{\"data\":[{}]}";
+        objectMapperMock.registerModule(new JavaTimeModule());
+     when(flightRequestMapperMock.getHttpRequest(any())).thenReturn(httpRequestMock);
+     when(flightsClientMock.getHttpResponse(httpRequestMock)).thenReturn(httpResponseMock);
+     when(httpResponseMock.body()).thenReturn(resultString);
+     when(objectMapperMock.readValue(resultString, FlightResponseDTO.class)).thenReturn(flightResponseDTOMock);
+     when(flightResponseDTOMock.getData()).thenReturn(flightDataDTOListMock);
 
-        System.out.println(flightsServiceMock.getHttpRequest(url));
-        when(httpRequestMock.uri()).thenReturn(uriMock);
-        when(httpResponseMock.headers()).thenReturn(null);
-        when(flightsServiceMock.getHttpRequest(url)).thenReturn(httpRequestMock);
 
-        when(flightsServiceMock.getHttpResponse(httpRequestMock)).thenReturn(httpResponseMock);
-        when(httpResponseMock.body()).thenReturn(resultString);
-        when(objectMapperMock.readValue(resultString, FlightResponseDTO.class)).thenReturn(flightResponseDTOMock);
-        when(flightResponseDTOMock.getData()).thenReturn(flightDataDTOListMock);
+
 
 
         // Act
-        List<FlightDataDTO> result = flightsServiceMock.getFlightsData(0);
+        List<FlightDataDTO> result = testobj.getFlightsData(0,"");
 
         // Assert
         assertEquals(flightDataDTOListMock, result);

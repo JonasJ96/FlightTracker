@@ -17,22 +17,23 @@ public class FlightController {
     private final FlightsService flightsService;
     private List<FlightData> itemList = new ArrayList<>();
 
-    private int offset = 0;
 
     public FlightController(FlightsService flightsService) {
         this.flightsService = flightsService;
     }
 
     @GetMapping("/flights")
-    public String flights(@RequestParam(defaultValue = "0") int offset, Model model) throws Exception {
+    public String flights(@RequestParam(defaultValue = "0") int offset,@RequestParam(defaultValue = "") String airline, Model model) throws Exception {
 
-        if(itemList.isEmpty()) {
-            flightsService.getFlightsData(offset).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
-        }
+//        if(itemList.isEmpty()) {
+//            flightsService.getFlightsData(offset,airline).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
+//        }
 
         itemList = new ArrayList<>();
-        flightsService.getFlightsData(offset).forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
-
+        List<FlightDataDTO> list = flightsService.getFlightsData(offset,airline);
+        if(!list.isEmpty()) {
+            list.forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
+        }
 
 
         model.addAttribute("itemList", itemList);

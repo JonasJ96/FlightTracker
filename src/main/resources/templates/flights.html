@@ -89,15 +89,42 @@
             text-decoration: underline;
         }
 
+        .filter-section {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-left: 20px;
+        }
 
+        input {
+            padding: 8px;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 14px;
+        }
 
+        .apply-filters-btn {
+            margin-left: 5px; /* Adjust the margin as needed */
+        }
     </style>
+
+    <script src="/JsScripts.js"></script>
+
+
 </head>
 <body>
 
 <h2>Flight List</h2>
 
 <button onclick="loadMoreFlights()">Load More Flights</button>
+
+<button onclick="refreshPage()">↻</button>
+
+<div class="filter-section">
+    <input type="text" id="airlineFilter" placeholder="Enter Airline">
+    <button class="apply-filters-btn" onclick="applyFilters()">Apply Filters</button>
+</div>
 
 
 <table>
@@ -106,6 +133,7 @@
         <th>Flight Number</th>
         <th>Flight Date</th>
         <th>Flight Status</th>
+        <th>Airline</th>
         <th>Departure</th>
         <th>Arrival</th>
     </tr>
@@ -115,6 +143,7 @@
         <td th:text="${flightData.number}">Flight Number</td>
         <td th:text="${flightData.flight_date}">Flight Date</td>
         <td th:text="${flightData.flight_status}">Flight Status</td>
+        <td th:text="${flightData.airline.name}">Airline</td>
         <td>
             <a href="#" th:text="${flightData.departure.airport}"
                th:data-title="'Departure Info'"
@@ -137,45 +166,11 @@
     </tbody>
 </table>
 
+
 <div class="overlay" th:onclick="'hidePopup()'"></div>
 <div id="popup" class="popup"></div>
 
-<script th:inline="javascript">
-    function showPopup(link) {
-        var title = link.getAttribute('data-title');
-        var airport = link.getAttribute('data-airport');
-        var scheduled = link.getAttribute('data-scheduled');
-        var actual = link.getAttribute('data-actual');
-        var estimated = link.getAttribute('data-estimated');
-        var content = 'Airport: ' + airport + '<br>Scheduled: ' + scheduled + '<br>Actual: ' + actual + '<br>Estimated: ' + estimated;
-        document.getElementById('popup').innerHTML = '<h3>' + title + '</h3><p>' + content + '</p>';
-        document.getElementById('popup').style.display = 'block';
-        document.querySelector('.overlay').style.display = 'block';
-    }
 
-    function hidePopup() {
-        document.getElementById('popup').style.display = 'none';
-        document.querySelector('.overlay').style.display = 'none';
-    }
-
-        function loadMoreFlights() {
-
-        var currentOffset = new URLSearchParams(window.location.search).get('offset');
-
-
-        currentOffset = currentOffset ? parseInt(currentOffset) : 0;
-
-
-        var newOffset = currentOffset + 100;
-
-
-        var newUrl = window.location.origin + window.location.pathname + '?offset=' + newOffset;
-
-
-        window.location.href = newUrl;
-    }
-
-</script>
 
 </body>
 </html>
