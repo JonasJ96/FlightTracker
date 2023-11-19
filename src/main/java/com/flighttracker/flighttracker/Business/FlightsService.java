@@ -18,12 +18,12 @@ import java.util.List;
 
 @Service
 public class FlightsService {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-
+    private final ObjectMapper objectMapper;
     private final FlightsClient flightsClient;
     private final FlightRequestMapper flightRequestMapper;
 
-    public FlightsService(FlightsClient flightsClient, FlightRequestMapper flightRequestMapper) {
+    public FlightsService(ObjectMapper objectMapper, FlightsClient flightsClient, FlightRequestMapper flightRequestMapper) {
+        this.objectMapper = objectMapper;
         this.flightsClient = flightsClient;
         this.flightRequestMapper = flightRequestMapper;
     }
