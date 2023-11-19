@@ -1,9 +1,6 @@
 package com.flighttracker.flighttracker.DataObjects;
 
-import com.flighttracker.flighttracker.DTO.ArrivalDTO;
-import com.flighttracker.flighttracker.DTO.DepartureDTO;
-import com.flighttracker.flighttracker.DTO.FlightDTO;
-import com.flighttracker.flighttracker.DTO.FlightDataDTO;
+import com.flighttracker.flighttracker.DTO.*;
 
 public class FlightData {
 
@@ -14,6 +11,16 @@ public class FlightData {
     private AirlineData airline;
     private DepartureData departure;
     private ArrivalData arrival;
+
+    private LiveData liveData;
+
+    public LiveData getLiveData() {
+        return liveData;
+    }
+
+    public void setLiveData(LiveData liveData) {
+        this.liveData = liveData;
+    }
 
     public String getFlight_date() {
         return flight_date;
@@ -71,6 +78,10 @@ public class FlightData {
         flightData.setFlight_date(flightDataDTO.getFlight_date());
         flightData.setFlight_status(flightDataDTO.getFlight_status());
         flightData.setNumber(flightDataDTO.getFlight().getNumber());
+        if(flightDataDTO.getLive() != null)
+            flightData.setLiveData(LiveData.mapFromDTO(flightDataDTO.getLive()));
+        else
+            flightData.setLiveData(null);
         return flightData;
     }
 

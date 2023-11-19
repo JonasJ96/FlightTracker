@@ -105,7 +105,7 @@
         }
 
         .apply-filters-btn {
-            margin-left: 5px; /* Adjust the margin as needed */
+            margin-left: 5px;
         }
     </style>
 
@@ -136,6 +136,7 @@
         <th>Airline</th>
         <th>Departure</th>
         <th>Arrival</th>
+        <th>Live Data</th>
     </tr>
     </thead>
     <tbody>
@@ -151,7 +152,7 @@
                th:data-scheduled="${flightData.departure.scheduled}"
                th:data-actual="${flightData.departure.actual}"
                th:data-estimated="${flightData.departure.estimated}"
-               onclick="showPopup(this)"></a>
+               onclick="showPopupDepartureArrival(this)"></a>
         </td>
         <td>
             <a href="#" th:text="${flightData.arrival.airport}"
@@ -160,8 +161,17 @@
                th:data-scheduled="${flightData.arrival.scheduled}"
                th:data-actual="${flightData.arrival.actual}"
                th:data-estimated="${flightData.arrival.estimated}"
-               onclick="showPopup(this)"></a>
+               onclick="showPopupDepartureArrival(this)"></a>
         </td>
+        <td th:if="${flightData.liveData != null}">
+            <a href="#" th:text="'Live Data'"
+               th:data-title="'Live Data Info'"
+               th:data-altitude="${flightData.liveData.altitude}"
+               th:data-latitude="${flightData.liveData.latitude}"
+               th:data-longitude="${flightData.liveData.longitude}"
+               onclick="showPopupLive(this)"></a>
+        </td>
+        <td th:unless="${flightData.liveData != null}">N/A</td>
     </tr>
     </tbody>
 </table>
