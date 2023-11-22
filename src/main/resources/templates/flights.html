@@ -154,7 +154,6 @@
                th:data-estimated="${flightData.departure.estimated}"
                onclick="showPopupDepartureArrival(this)"></a>
         </td>
-        <a href="#" onclick="showPopupAirportData(this)" data-title="' + title + '" data-airport="' + airport + '" data-iata="' + iata + '" data-icao="' + icao + '" data-timezone="' + timezone + '">' + airport + '</a><br>Scheduled: ' + scheduled + '<br>Actual: ' + actual + '<br>Estimated: ' + estimated;
 
         <td>
             <a href="#" th:text="${flightData.arrival.airport}"
