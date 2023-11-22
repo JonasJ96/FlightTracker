@@ -11,8 +11,18 @@ public class FlightData {
     private AirlineData airline;
     private DepartureData departure;
     private ArrivalData arrival;
+    private AirportData airportData;
+
 
     private LiveData liveData;
+
+    public AirportData getAirportData() {
+        return airportData;
+    }
+
+    public void setAirportData(AirportData airportData) {
+        this.airportData = airportData;
+    }
 
     public LiveData getLiveData() {
         return liveData;
@@ -78,6 +88,7 @@ public class FlightData {
         flightData.setFlight_date(flightDataDTO.getFlight_date());
         flightData.setFlight_status(flightDataDTO.getFlight_status());
         flightData.setNumber(flightDataDTO.getFlight().getNumber());
+        flightData.setAirportData(AirportData.mapFromDTO(flightDataDTO.getArrival()));
         if(flightDataDTO.getLive() != null)
             flightData.setLiveData(LiveData.mapFromDTO(flightDataDTO.getLive()));
         else

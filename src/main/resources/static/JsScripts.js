@@ -4,7 +4,17 @@ function showPopupDepartureArrival(link) {
     var scheduled = link.getAttribute('data-scheduled');
     var actual = link.getAttribute('data-actual');
     var estimated = link.getAttribute('data-estimated');
-    var content = 'Airport: ' + airport + '<br>Scheduled: ' + scheduled + '<br>Actual: ' + actual + '<br>Estimated: ' + estimated;
+
+    var iata = link.getAttribute('data-iata');
+    var icao = link.getAttribute('data-icao');
+    var timezone = link.getAttribute('data-timezone');
+
+    var content = 'Airport: <a href="#" onclick="showPopupAirportData(this)"';
+    content += ' data-title="' + title + '" data-airport="' + airport + '"';
+    content += ' data-iata="' + iata + '" data-icao="' + icao + '" data-timezone="' + timezone + '">';
+    content += airport + '</a><br>Scheduled: ' + scheduled + '<br>Actual: ' + actual + '<br>Estimated: ' + estimated;
+
+
     document.getElementById('popup').innerHTML = '<h3>' + title + '</h3><p>' + content + '</p>';
     document.getElementById('popup').style.display = 'block';
     document.querySelector('.overlay').style.display = 'block';
@@ -15,6 +25,16 @@ function showPopupLive(link) {
     var latitude = link.getAttribute('data-latitude');
     var longitude = link.getAttribute('data-longitude');
     var content = 'Altitude: ' + altitude + '<br>Latitude: ' + latitude + '<br>Longitude: ' + longitude;
+    document.getElementById('popup').innerHTML = '<h3>' + title + '</h3><p>' + content + '</p>';
+    document.getElementById('popup').style.display = 'block';
+    document.querySelector('.overlay').style.display = 'block';
+}
+function showPopupAirportData(link) {
+    var title = "Airport information";
+    var iata = link.getAttribute('data-iata');
+    var icao = link.getAttribute('data-icao');
+    var timezone = link.getAttribute('data-timezone');
+    var content = 'iata: ' + iata + '<br>icao: ' + icao + '<br>timezone: ' + timezone;
     document.getElementById('popup').innerHTML = '<h3>' + title + '</h3><p>' + content + '</p>';
     document.getElementById('popup').style.display = 'block';
     document.querySelector('.overlay').style.display = 'block';

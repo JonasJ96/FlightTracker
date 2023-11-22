@@ -154,6 +154,8 @@
                th:data-estimated="${flightData.departure.estimated}"
                onclick="showPopupDepartureArrival(this)"></a>
         </td>
+        <a href="#" onclick="showPopupAirportData(this)" data-title="' + title + '" data-airport="' + airport + '" data-iata="' + iata + '" data-icao="' + icao + '" data-timezone="' + timezone + '">' + airport + '</a><br>Scheduled: ' + scheduled + '<br>Actual: ' + actual + '<br>Estimated: ' + estimated;
+
         <td>
             <a href="#" th:text="${flightData.arrival.airport}"
                th:data-title="'Arrival Info'"
@@ -161,6 +163,9 @@
                th:data-scheduled="${flightData.arrival.scheduled}"
                th:data-actual="${flightData.arrival.actual}"
                th:data-estimated="${flightData.arrival.estimated}"
+               th:data-iata="${flightData.airportData.iata}"
+               th:data-icao="${flightData.airportData.icao}"
+               th:data-timezone="${flightData.airportData.timezone}"
                onclick="showPopupDepartureArrival(this)"></a>
         </td>
         <td th:if="${flightData.liveData != null}">
