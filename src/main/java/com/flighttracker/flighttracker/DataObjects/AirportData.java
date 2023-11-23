@@ -47,7 +47,8 @@ public class AirportData {
         airportData.setIata(arrivalDTO.getIata());
         airportData.setIcao(arrivalDTO.getIcao());
         airportData.setAirportName(arrivalDTO.getAirport());
-        airportData.setAirportName(arrivalDTO.getTimezone());
+        airportData.setTimezone(arrivalDTO.getTimezone());
+
         return airportData;
     }
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Map</title>
+  <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AtYRfTI-SOUMbIoLeHtdnOX6uEGVUsZQ44yz9elveL5xkqwBO50fmuX2Nn29lemz&callback=loadMapScenario'></script>
+  <style>
+    #map {
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script>
+  var map;
+
+  function loadMapScenario() {
+    map = new Microsoft.Maps.Map(document.getElementById('map'), {
+      center: new Microsoft.Maps.Location(0, 0),
+      zoom: 2
+    });
+    // Make AJAX request to your Spring Boot backend to get coordinates
+    // and add markers to the map accordingly.
+    addRandomMarkers();
+  }
+  function addRandomMarkers() {
+    // Generate random coordinates for demonstration
+    for (var i = 0; i < 10; i++) {
+      var randomLat = Math.random() * 180 - 90;
+      var randomLng = Math.random() * 360 - 180;
+
+      var location = new Microsoft.Maps.Location(randomLat, randomLng);
+
+      // Create a pushpin and add it to the map
+      var pin = new Microsoft.Maps.Pushpin(location, {
+        title: 'Marker ' + (i + 1),
+        subTitle: 'Random Location',
+      });
+
+      Microsoft.Maps.Events.addHandler(pin, 'click', function (e) {
+        // Handle pin click event if needed
+        alert('Marker clicked: ' + e.target.getTitle());
+      });
+
+      map.entities.push(pin);
+    }
+  }
+</script>
+</body>
+</html>
