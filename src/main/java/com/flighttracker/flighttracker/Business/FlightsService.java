@@ -50,6 +50,7 @@ public class FlightsService {
         return flightResponseDTO.getData();
     }
 
+
     private static String getAirlineURL(String airline) throws UnsupportedEncodingException {
         return airline != null && !airline.isEmpty() ? "&airline_name=" + URLEncoder.encode(airline, "UTF-8") : "";
     }

@@ -13,7 +13,6 @@ public class FlightData {
     private ArrivalData arrival;
     private AirportData airportData;
 
-
     private LiveData liveData;
 
     public AirportData getAirportData() {
