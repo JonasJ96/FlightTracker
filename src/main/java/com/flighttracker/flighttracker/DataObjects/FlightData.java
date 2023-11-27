@@ -15,6 +15,16 @@ public class FlightData {
 
     private LiveData liveData;
 
+    private AircraftData aircraftData;
+
+    public AircraftData getAircraftData() {
+        return aircraftData;
+    }
+
+    public void setAircraftData(AircraftData aircraftData) {
+        this.aircraftData = aircraftData;
+    }
+
     public AirportData getAirportData() {
         return airportData;
     }
@@ -88,10 +98,13 @@ public class FlightData {
         flightData.setFlight_status(flightDataDTO.getFlight_status());
         flightData.setNumber(flightDataDTO.getFlight().getNumber());
         flightData.setAirportData(AirportData.mapFromDTO(flightDataDTO.getArrival()));
-        if(flightDataDTO.getLive() != null)
+        if(flightDataDTO.getLive() != null){
             flightData.setLiveData(LiveData.mapFromDTO(flightDataDTO.getLive()));
-        else
+            flightData.setAircraftData(AircraftData.mapFromDTO(flightDataDTO.getAircraft()));}
+        else {
             flightData.setLiveData(null);
+            flightData.setAircraftData(null);
+        }
         return flightData;
     }
 

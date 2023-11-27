@@ -152,6 +152,9 @@
                th:data-scheduled="${flightData.departure.scheduled}"
                th:data-actual="${flightData.departure.actual}"
                th:data-estimated="${flightData.departure.estimated}"
+               th:data-iata="${flightData.airportData.iata}"
+               th:data-icao="${flightData.airportData.icao}"
+               th:data-timezone="${flightData.airportData.timezone}"
                onclick="showPopupDepartureArrival(this)"></a>
         </td>
 

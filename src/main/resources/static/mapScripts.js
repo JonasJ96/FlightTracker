@@ -53,12 +53,15 @@ function addFlightPins() {
                 });
 
 
-                /*
+
                 Microsoft.Maps.Events.addHandler(pin, 'click', function (e) {
                     // Handle pin click event if needed
-                    alert('Marker clicked: ' + e.target.getTitle());
+                    alert('Information about Aircraft\n' +
+                        'Registration number: ' + element.aircraftData.registration + '\n' +
+                        'Aircraft iata: ' + element.aircraftData.iata  + '\n' +
+                        'Aircraft icao: ' + element.aircraftData.icao);
                 });
-                */
+
 
                 map.entities.push(pin);
             }
