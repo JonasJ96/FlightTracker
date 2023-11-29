@@ -3,13 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h2 {
+            text-align: center;
+            color: #3498db;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-<h1 th:text="'Hello'"></h1>
+<h2>FlightTracker</h2>
 
+    <a th:href="@{/flights}">
+        <button>Go to Flights</button>
+    </a>
+    <a th:href="@{/map}">
+        <button>Go to Map of flights</button>
+    </a>
 
-<a th:href="@{/flights}">
-    <button>Go to Flights</button>
-</a>
 </body>
 </html>

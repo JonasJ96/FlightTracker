@@ -107,6 +107,11 @@
         .apply-filters-btn {
             margin-left: 5px;
         }
+        .home-button {
+            position: absolute;
+            left: 0;
+            margin: 20px;
+        }
     </style>
 
     <script src="/JsScripts.js"></script>
@@ -114,7 +119,11 @@
 
 </head>
 <body>
-
+<div class="home-button">
+    <a th:href="@{/}">
+        <button>← Return to home-screen</button>
+    </a>
+</div>
 <h2>Flight List</h2>
 
 <button onclick="loadMoreFlights()">Load More Flights</button>
