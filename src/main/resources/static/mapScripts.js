@@ -1,20 +1,14 @@
 
 var map;
 
-console.log('itemList:', list);
-
-
 function loadMapScenario() {
     map = new Microsoft.Maps.Map(document.getElementById('map'), {
         center: new Microsoft.Maps.Location(0, 0),
         zoom: 2
     });
-    // Make AJAX request to your Spring Boot backend to get coordinates
-    // and add markers to the map accordingly.
     addFlightPins();
 }
 function addFlightPins() {
-    // Generate random coordinates for demonstration
     console.log(list)
     list.forEach((element) => {
         if (element.liveData) {
@@ -24,17 +18,13 @@ function addFlightPins() {
             var img = new Image();
             img.src = '/airplane.png';
             img.onload = function () {
-                var c = document.createElement('canvas');
-
+                var canvas = document.createElement('canvas');
                 var rotationAngleRads = (element.liveData.direction-45)*Math.PI/180;
+                canvas.width = 32
+                canvas.height = 32
+                var context = canvas.getContext('2d');
 
-                c.width = 32
-                c.height = 32
-
-                var context = c.getContext('2d');
-
-
-                context.translate(c.width / 2, c.height / 2);
+                context.translate(canvas.width / 2, canvas.height / 2);
 
                 context.rotate(rotationAngleRads);
 
@@ -42,7 +32,7 @@ function addFlightPins() {
 
 
                 var pin = new Microsoft.Maps.Pushpin(location, {
-                    icon: c.toDataURL(),
+                    icon: canvas.toDataURL(),
                     title: 'Flight ' + (element.number),
                     subTitle: 'Going to ' + element.arrival.airport,
                     anchor: new Microsoft.Maps.Point(0, 0),
