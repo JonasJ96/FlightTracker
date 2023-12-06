@@ -9,8 +9,6 @@ public class AirlineDTO {
     private String iata;
     private String icao;
 
-    // getters and setters
-
     public String getName() {
         return name;
     }

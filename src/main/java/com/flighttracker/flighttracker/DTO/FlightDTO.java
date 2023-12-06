@@ -9,8 +9,6 @@ public class FlightDTO {
     private String icao;
 
 
-    // getters and setters
-
     public String getNumber() {
         return number;
     }
