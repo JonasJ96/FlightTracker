@@ -34,9 +34,6 @@ public class FlightsServiceTest {
     FlightRequestMapper flightRequestMapperMock;
 
     @Mock
-    private HttpClient httpClientMock;
-
-    @Mock
     private ObjectMapper objectMapperMock;
 
     @Mock
@@ -47,8 +44,7 @@ public class FlightsServiceTest {
     private FlightResponseDTO flightResponseDTOMock;
     @Mock
     private List<FlightDataDTO> flightDataDTOListMock;
-    @Mock
-    private URI uriMock;
+
 
     @Test
     void testGetFlightsData() throws URISyntaxException, IOException, InterruptedException {
@@ -59,10 +55,6 @@ public class FlightsServiceTest {
      when(httpResponseMock.body()).thenReturn(resultString);
      when(objectMapperMock.readValue(resultString, FlightResponseDTO.class)).thenReturn(flightResponseDTOMock);
      when(flightResponseDTOMock.getData()).thenReturn(flightDataDTOListMock);
-
-
-
-
 
         // Act
         List<FlightDataDTO> result = testobj.getFlightsData(0,"");

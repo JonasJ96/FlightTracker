@@ -25,7 +25,6 @@ public class FlightController {
     @GetMapping("/flights")
     public String flights(@RequestParam(defaultValue = "0") int offset,@RequestParam(defaultValue = "") String airline, Model model) throws Exception {
 
-        itemList = new ArrayList<>();
         List<FlightDataDTO> list = flightsService.getFlightsData(offset,airline);
         if(!list.isEmpty()) {
             list.forEach(e -> itemList.add(FlightData.mapFromDTO(e)));
