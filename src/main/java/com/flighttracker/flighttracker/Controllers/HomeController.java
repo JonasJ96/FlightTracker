@@ -17,11 +17,10 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-    private final FlightsService flightsService;
-    private List<FlightDataDTO> itemList = Collections.emptyList();
 
-    public HomeController(FlightsService flightsService) {
-        this.flightsService = flightsService;
+
+    public HomeController() {
+
     }
 
     @GetMapping("/")

@@ -26,7 +26,6 @@ public class MapController {
     @GetMapping("/map")
     public String flights(Model model) throws Exception {
         //Rigtig kode hvis API virker
-
         itemList = new ArrayList<>();
         List<FlightDataDTO> list = flightsService.getFlightsData(0,"");
         if(!list.isEmpty()) {
