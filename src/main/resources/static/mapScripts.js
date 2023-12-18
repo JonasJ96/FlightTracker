@@ -14,7 +14,6 @@ function addFlightPins() {
         if (element.liveData) {
             var location = new Microsoft.Maps.Location(element.liveData.latitude, element.liveData.longitude);
 
-
             var img = new Image();
             img.src = '/airplane.png';
             img.onload = function () {
@@ -38,15 +37,12 @@ function addFlightPins() {
                     anchor: new Microsoft.Maps.Point(0, 0),
                 });
 
-
-
                 Microsoft.Maps.Events.addHandler(pin, 'click', function (e) {
                     alert('Information about Aircraft\n' +
                         'Registration number: ' + element.aircraftData.registration + '\n' +
                         'Aircraft iata: ' + element.aircraftData.iata  + '\n' +
                         'Aircraft icao: ' + element.aircraftData.icao);
                 });
-
 
                 map.entities.push(pin);
             }

@@ -15,7 +15,7 @@ public class FlightDataGenerator {
 
         for (int i = 0; i < 100; i++) {
             FlightData flightData = new FlightData();
-            flightData.setFlight_date(generateRandomDate());
+            flightData.setFlight_date("2023-12-13");
             flightData.setFlight_status(generateRandomFlightStatus());
             flightData.setNumber("FL" + (i + 1));
             flightData.setAirline(generateRandomAirline());
@@ -31,9 +31,6 @@ public class FlightDataGenerator {
         return flightDataList;
     }
 
-    private static String generateRandomDate() {
-        return "2023-12-13";
-    }
 
     private static String generateRandomFlightStatus() {
         String[] statuses = {"On Time", "Delayed", "Cancelled"};

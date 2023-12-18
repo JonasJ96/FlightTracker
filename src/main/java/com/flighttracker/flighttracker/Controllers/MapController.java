@@ -26,7 +26,7 @@ public class MapController {
     @GetMapping("/map")
     public String flights(Model model) throws Exception {
         //Rigtig kode hvis API virker
-        /*
+
         itemList = new ArrayList<>();
         List<FlightDataDTO> list = flightsService.getFlightsData(0,"");
         if(!list.isEmpty()) {
@@ -36,17 +36,17 @@ public class MapController {
 
         model.addAttribute("itemList", itemList);
         return "map";
-        */
+
 
         //Kode med tilfældigt genereret data
-        List<FlightData> list = FlightDataGenerator.generateRandomFlightDataList();
-        if(!list.isEmpty()) {
-            itemList.addAll(list);
-        }
-
-
-        model.addAttribute("itemList", itemList);
-
-        return "map";
+//        List<FlightData> list = FlightDataGenerator.generateRandomFlightDataList();
+//        if(!list.isEmpty()) {
+//            itemList.addAll(list);
+//        }
+//
+//
+//        model.addAttribute("itemList", itemList);
+//
+//        return "map";
         }
 }

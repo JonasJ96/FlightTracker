@@ -30,14 +30,4 @@ public class HomeController {
     }
 
 
-    @GetMapping("/test")
-    public String test(Model model) throws Exception {
-        if(itemList.isEmpty()) {
-             itemList = flightsService.getFlightsData(0,"");
-        }
-        model.addAttribute("itemList", itemList);
-
-
-        return "test";
-    }
 }
